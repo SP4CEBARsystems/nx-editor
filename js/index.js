@@ -4,24 +4,31 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function showPlayer() {
-    var playerPreview = document.getElementById("player-preview");
-    /** @type {HTMLIFrameElement} */
-    var player = document.getElementById("player");
-    if (playerPreview) {
-        playerPreview.parentElement.removeChild(playerPreview);
+    setPlayer(elementToBlob("basic-code"));
+}
+
+/**
+ * 
+ * @param {string} elementId 
+ * @returns {string}
+ */
+function elementToBlob(elementId) {
+    const textareaElement = /** @type {HTMLTextAreaElement|null} */ (document.getElementById(elementId));
+    const code = textareaElement?.value?? '';
+    const blob = new Blob([code], { type: "text/plain" });
+    const dataUrl = URL.createObjectURL(blob);
+    return dataUrl;
+}
+
+/**
+ * 
+ * @param {string} dataUrl 
+ */
+function setPlayer(dataUrl) {
+    const player = /** @type {HTMLIFrameElement|null} */ (document.getElementById("player"));
+    if (player) {
+        player.removeAttribute("src");
+        player.setAttribute("src", "package/index.html?p=" + dataUrl);
+        player.focus();
     }
-    player.style.display = "block";
-
-    // Clear the iframe before using it
-    player.removeAttribute("src");
-    player.src = "about:blank";
-
-    // Get code from textarea
-    var code = document.getElementById("basic-code").value;
-    console.log('code', code);
-    var blob = new Blob([code], { type: "text/plain" });
-    var dataUrl = URL.createObjectURL(blob);
-
-    player.setAttribute("src", "package/index.html?p=" + dataUrl);
-    player.focus();
 }
