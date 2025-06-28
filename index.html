@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Template</title>
-	<link rel="stylesheet" href="./styles/styles.css">
-	<style>
-	</style>
-</head>
-<body>
-	<script type="module" src="./js/index.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Template</title>
+		<link rel="stylesheet" href="./styles/styles.css">
+		<title>LowRes NX Editor</title>
+		<style>
+		</style>
+	</head>
+	<body class="vsc-initialized">
+		<script>
+			function showPlayer() {
+				var playerPreview = document.getElementById("player-preview");
+				/** @type {HTMLIFrameElement} */
+				var player = document.getElementById("player");
+				if (playerPreview) {
+					playerPreview.parentElement.removeChild(playerPreview);
+				}
+				player.style.display = "block";
+
+				// Clear the iframe before using it
+				player.removeAttribute("src");
+				player.src = "about:blank";
+
+				// Get code from textarea
+				var code = document.getElementById("basic-code").value;
+				console.log('code', code);
+				var blob = new Blob([code], { type: "text/plain" });
+				var dataUrl = URL.createObjectURL(blob);
+
+				player.setAttribute("src", "https://lowresnx.inutilis.com/player.php?p=" + dataUrl);
+				player.focus();
+			}
+		</script>
+		<div id="editor-container" style="margin-bottom: 1em; padding: 1em; border: 1px solid rgb(204, 204, 204);">
+			<textarea id="basic-code" rows="10" cols="60" placeholder="Enter BASIC code here...">PRINT "HELLO WORLD"</textarea>
+			<br>
+			<button onclick="showPlayer()">Run Custom Code</button>
+		</div>
+		<div class="grid">
+			<div>
+				<iframe id="player" width="640" height="512" allow="fullscreen" style="display: none;" value="EppSh9pZxH_LowRes_Galaxy_2_1.5.nx">
+					
+				</iframe>
+			</div>
+		</div>
+		<script type="module" src="./js/index.js"></script>
+	</body>
 </html>
