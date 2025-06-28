@@ -31,7 +31,7 @@
 				var blob = new Blob([code], { type: "text/plain" });
 				var dataUrl = URL.createObjectURL(blob);
 
-				player.setAttribute("src", "https://lowresnx.inutilis.com/player.php?p=" + dataUrl);
+				player.setAttribute("src", "package/index.html?p=" + dataUrl);
 				player.focus();
 			}
 		</script>
