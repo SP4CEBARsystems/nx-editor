@@ -10,20 +10,27 @@
 	</head>
 	<body class="vsc-initialized">
 		<main>
-			<h1>NX Editor</h1>
-			<p>An <i>unofficial</i> online code editor for the <a href="https://lowresnx.inutilis.com/" target="_blank" rel="noopener noreferrer">LowRes NX Fantasy Console</a></p>
-			<div id="editor-container" style="margin-bottom: 1em; padding: 1em; border: 1px solid rgb(204, 204, 204);">
-				<textarea id="basic-code" rows="10" cols="60" placeholder="Enter BASIC code here...">PRINT "HELLO WORLD"</textarea>
-				<br>
-				<button id="runShowPlayer">Run Custom Code</button>
-			</div>
-			<div class="grid">
-				<div>
-					<iframe id="player" width="640" height="512" allow="fullscreen">
-					</iframe>
+			<header>
+				<h1>NX Editor</h1>
+				<p>An <i>unofficial</i> online code editor for the <a href="https://lowresnx.inutilis.com/" target="_blank" rel="noopener noreferrer">LowRes NX Fantasy Console</a></p>
+			</header>
+			<section>
+				<div id="editor-container" style="margin-bottom: 1em; padding: 1em; border: 1px solid rgb(204, 204, 204);">
+					<textarea id="basic-code" rows="10" cols="60" placeholder="Enter BASIC code here...">PRINT "HELLO WORLD"</textarea>
+					<br>
+					<button id="runShowPlayer">Run Custom Code</button>
 				</div>
-			</div>
-			<script type="module" src="./js/index.js"></script>
+				<div class="grid">
+					<div>
+						<iframe id="player" width="640" height="512" allow="fullscreen">
+						</iframe>
+					</div>
+				</div>
+			</section>
+			<footer>
+				<a href="https://github.com/SP4CEBARsystems/nx-editor" target="_blank" rel="noopener noreferrer">Contribute</a>
+			</footer>
 		</main>
+		<script type="module" src="./js/index.js"></script>
 	</body>
 </html>
