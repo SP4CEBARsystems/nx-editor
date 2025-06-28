@@ -9,20 +9,22 @@
 		</style>
 	</head>
 	<body class="vsc-initialized">
-		<h1>NX Editor</h1>
-		<p>An <i>unofficial</i> online code editor for the <a href="https://lowresnx.inutilis.com/" target="_blank" rel="noopener noreferrer">LowRes NX Fantasy Console</a></p>
-		<div id="editor-container" style="margin-bottom: 1em; padding: 1em; border: 1px solid rgb(204, 204, 204);">
-			<textarea id="basic-code" rows="10" cols="60" placeholder="Enter BASIC code here...">PRINT "HELLO WORLD"</textarea>
-			<br>
-			<button id="runShowPlayer">Run Custom Code</button>
-		</div>
-		<div class="grid">
-			<div>
-				<iframe id="player" width="640" height="512" allow="fullscreen" style="display: none;" value="EppSh9pZxH_LowRes_Galaxy_2_1.5.nx">
-					
-				</iframe>
+		<main>
+			<h1>NX Editor</h1>
+			<p>An <i>unofficial</i> online code editor for the <a href="https://lowresnx.inutilis.com/" target="_blank" rel="noopener noreferrer">LowRes NX Fantasy Console</a></p>
+			<div id="editor-container" style="margin-bottom: 1em; padding: 1em; border: 1px solid rgb(204, 204, 204);">
+				<textarea id="basic-code" rows="10" cols="60" placeholder="Enter BASIC code here...">PRINT "HELLO WORLD"</textarea>
+				<br>
+				<button id="runShowPlayer">Run Custom Code</button>
 			</div>
-		</div>
-		<script type="module" src="./js/index.js"></script>
+			<div class="grid">
+				<div>
+					<iframe id="player" width="640" height="512" allow="fullscreen" style="display: none;" value="EppSh9pZxH_LowRes_Galaxy_2_1.5.nx">
+						
+					</iframe>
+				</div>
+			</div>
+			<script type="module" src="./js/index.js"></script>
+		</main>
 	</body>
 </html>
