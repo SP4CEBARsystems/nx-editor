@@ -11,34 +11,10 @@
 	<body class="vsc-initialized">
 		<h1>NX Editor</h1>
 		<p>An <i>unofficial</i> online code editor for the <a href="https://lowresnx.inutilis.com/" target="_blank" rel="noopener noreferrer">LowRes NX Fantasy Console</a></p>
-		<script>
-			function showPlayer() {
-				var playerPreview = document.getElementById("player-preview");
-				/** @type {HTMLIFrameElement} */
-				var player = document.getElementById("player");
-				if (playerPreview) {
-					playerPreview.parentElement.removeChild(playerPreview);
-				}
-				player.style.display = "block";
-
-				// Clear the iframe before using it
-				player.removeAttribute("src");
-				player.src = "about:blank";
-
-				// Get code from textarea
-				var code = document.getElementById("basic-code").value;
-				console.log('code', code);
-				var blob = new Blob([code], { type: "text/plain" });
-				var dataUrl = URL.createObjectURL(blob);
-
-				player.setAttribute("src", "package/index.html?p=" + dataUrl);
-				player.focus();
-			}
-		</script>
 		<div id="editor-container" style="margin-bottom: 1em; padding: 1em; border: 1px solid rgb(204, 204, 204);">
 			<textarea id="basic-code" rows="10" cols="60" placeholder="Enter BASIC code here...">PRINT "HELLO WORLD"</textarea>
 			<br>
-			<button onclick="showPlayer()">Run Custom Code</button>
+			<button id="runShowPlayer">Run Custom Code</button>
 		</div>
 		<div class="grid">
 			<div>
