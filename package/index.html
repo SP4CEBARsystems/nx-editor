@@ -25,9 +25,12 @@
     </div>
 
     <script type='text/javascript'>
+      const params = new URLSearchParams(window.location.search);
+      const p = params.get("p");
+
       var Module = {
         canvas: document.getElementById('canvas'),
-        arguments: ["program.nx"],
+        arguments: [p],
         print: function(t) {
           console.log(t);
         },
