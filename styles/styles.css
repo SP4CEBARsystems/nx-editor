@@ -7,4 +7,14 @@ body {
 main {
     max-width: 50rem;
     margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Maintains aspect ratio of the canvas */
 }
