@@ -14,8 +14,8 @@
 				<h1>NX Editor</h1>
 				<p>An <i>unofficial</i> online code editor for the <a href="https://lowresnx.inutilis.com/" target="_blank" rel="noopener noreferrer">LowRes NX Fantasy Console</a></p>
 			</header>
-			<section>
-				<div id="editor-container" style="margin-bottom: 1em; padding: 1em; border: 1px solid rgb(204, 204, 204);">
+			<section class="debugger">
+				<div class="editor" style="margin-bottom: 1em; padding: 1em; border: 1px solid rgb(204, 204, 204);">
 					<textarea id="basic-code" rows="10" cols="60" placeholder="Enter BASIC code here...">
 						PRINT "HELLO WORLD"
 						TOUCHSCREEN
@@ -27,7 +27,7 @@
 					<br>
 					<button id="runShowPlayer">Run Custom Code</button>
 				</div>
-				<div class="grid">
+				<div class="viewer" class="grid">
 					<div>
 						<iframe id="player" allow="fullscreen">
 						</iframe>
