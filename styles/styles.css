@@ -8,3 +8,32 @@ main {
     max-width: 50rem;
     margin-inline: auto;
 }
+
+/* align-items: center;
+justify-content: center; */
+.debugger {
+    flex-direction: column;
+    display: flex;
+    /* gap: 16px; */
+}
+
+@media (min-width: 800px) {
+  .debugger {
+    flex-direction: row;
+  }
+}
+/* .debugger > * {
+  flex: 1;
+} */
+
+iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 20 / 16;
+    /* height: auto; */
+    /* height: fit-content; */
+    /* object-fit: contain; */
+    /* width: 1000px; */
+    /* height: 600px; */
+    /* height: 1000px; */
+}
