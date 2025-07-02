@@ -19,15 +19,15 @@ main {
 
 /* align-items: center;
 justify-content: center; */
-/* .debugger {
-    flex-direction: row;
+.debugger {
+    flex-direction: column;
     display: flex;
     gap: 16px;
 }
 
 .debugger > * {
     flex: 1;
-} */
+}
 
 iframe {
     display: block;
@@ -52,27 +52,29 @@ iframe {
     /* transform: scale(1.5); */
 }
 
-/* @media (max-width: 800px) {
+@media (min-width: 800px) {
     .debugger {
-        flex-direction: column;
-    } */
-    
-    
-    @media (max-width: 656px) {
-        iframe {
-            transform: scale(0.75);
-        }
+        flex-direction: row;
     }
-    
-    @media (max-width: 496px) {
-        iframe {
-            transform: scale(0.5);
-        }
+    iframe{
+        transform: scale(0.5);
     }
-    
-    @media (min-width: 977px) {
-        iframe {
-            transform: scale(1);
-        }
+}
+
+@media (max-width: 656px) {
+    iframe {
+        transform: scale(0.75);
     }
-/* } */
+}
+
+@media (max-width: 496px) {
+    iframe {
+        transform: scale(0.5);
+    }
+}
+
+@media (min-width: 977px) {
+    iframe {
+        transform: scale(1);
+    }
+}
