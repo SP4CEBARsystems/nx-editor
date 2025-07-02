@@ -8,14 +8,72 @@
     <style>
     body {
       background-color: #000;
+    }
+    html, body {
       margin: 0;
       padding: 0;
+      width: 100%;
+      height: 100%;
     }
     .emscripten_border {
+      width: 100%;
+      height: 100%;
+      /* height: auto; */
     }
     .emscripten {
       display: block;
-      margin: auto;
+      /* margin: auto; */
+
+      /* initial attempt */
+      /* width: 100%; */
+      /* height: auto; */
+      /* image-rendering: pixelated; */
+      
+      /* testing */
+      /* width: 1000px; */
+      /* height: 600px; */
+      /* width: 640px; */
+      /* height: 512px; */
+
+      /* try not to affect the canvas' width and height as the code then adds its own virtual margins */
+      /* display: block; */
+      /* transform-origin: top left;  */
+      
+      transform-origin: top left;
+
+      /* does not seem to work */
+      /* transform: scale(calc(100% / 640)); */
+
+      /* transform: scale(1.6); */
+      /* transform: scale(1.99166661500930805); */
+      /* transform: scale(1.99166661500930806); */
+    }
+    @media (max-width: 1280px) {
+      canvas {
+        transform: scale(1.5);
+      }
+    }
+
+    @media (max-width: 960px) {
+      canvas {
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 640px) {
+      canvas {
+        transform: scale(0.75);
+      }
+    }
+
+    @media (max-width: 480px) {
+      canvas {
+        transform: scale(0.5);
+      }
+    }
+
+    @media (min-width: 1281px) {
+      canvas { transform: scale(1.99166661500930805); }
     }
     </style>
   </head>
