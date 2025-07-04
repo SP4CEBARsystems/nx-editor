@@ -31,12 +31,12 @@ justify-content: center; */
 
 iframe {
     display: block;
-    /* width: 100%; */
+    width: 100%;
     /* aspect-ratio: 20 / 16; */
-    width:640px;
-    height:512px;
+    /* width:640px;
+    height:512px; */
     transform-origin: top left;
-    transform: scale(1);
+    /* transform: scale(1); */
     border: none;
     /* height: auto; */
     /* height: fit-content; */
@@ -52,7 +52,7 @@ iframe {
     /* transform: scale(1.5); */
 }
 
-@media (min-width: 800px) {
+/* @media (min-width: 800px) {
     .debugger {
         flex-direction: row;
     }
@@ -77,4 +77,4 @@ iframe {
     iframe {
         transform: scale(1);
     }
-}
+} */
