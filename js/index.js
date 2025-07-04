@@ -1,6 +1,9 @@
+import { initButtons } from './buttons.js';
+
 document.addEventListener("DOMContentLoaded", function() {
     const runShowPlayerElement = document.getElementById('runShowPlayer');
     runShowPlayerElement?.addEventListener('click', showPlayer);
+    // initButtons();
 });
 
 function showPlayer() {
