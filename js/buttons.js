@@ -25,7 +25,7 @@ function onIframeLoaded(event) {
     
     // ✅ Set editable via JS — guaranteed to work
     doc.body.setAttribute('contenteditable', 'true');
-    // doc.body.focus();
+    // iframe.focus();
     iframe.focus();
     
     // ✅ Confirm it worked
@@ -34,7 +34,7 @@ function onIframeLoaded(event) {
     // const iframe = document.querySelector("iframe");
     console.log('Body is contenteditable?', doc.body.isContentEditable);
     
-    doc.body.focus();
+    iframe.focus();
     setTimeout(() => {
         console.log('Active element in iframe:', doc.activeElement);
     }, 50);
@@ -42,7 +42,7 @@ function onIframeLoaded(event) {
 };
 
 function sendKey(targetWindow, type, key) {
-    doc.body.focus();
+    iframe.focus();
     const event = new KeyboardEvent(type, {
         key,
         bubbles: true,
@@ -71,13 +71,13 @@ function handleButton(button) {
 
     button.addEventListener('pointerdown', (e) => {
         e.preventDefault();
-        doc.body.focus();
+        iframe.focus();
         sendKey(targetWindow, 'keydown', key);
     });
 
     button.addEventListener('pointerup', (e) => {
         e.preventDefault();
-        doc.body.focus();
+        iframe.focus();
         sendKey(targetWindow, 'keyup', key);
     });
 
