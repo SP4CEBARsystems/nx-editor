@@ -19,6 +19,7 @@ main {
     display: flex;
     gap: 16px;
     flex-direction: row;
+    margin-bottom: 1em;
 }
 
 .viewer {
@@ -26,7 +27,6 @@ main {
 }
 
 .editor {
-    margin-bottom: 1em;
     padding: 1em;
     border: 1px solid rgb(204, 204, 204);
 }
