@@ -19,7 +19,7 @@ main {
     display: flex;
     gap: 16px;
     flex-direction: row;
-    margin-bottom: 1em;
+    margin-bottom: 3em;
 }
 
 .viewer {
