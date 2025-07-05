@@ -1,6 +1,9 @@
+import IframeResizer from "./IframeResizer.js";
+
 document.addEventListener("DOMContentLoaded", function() {
     const runShowPlayerElement = document.getElementById('runShowPlayer');
     runShowPlayerElement?.addEventListener('click', showPlayer);
+    new IframeResizer();
 });
 
 function showPlayer() {
