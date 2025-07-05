@@ -76,3 +76,17 @@ iframe {
         }
     }
 /* } */
+
+a {
+    color: #00FFFF;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #00bfbf;
+}
+
+a:active {
+    color: #007f7f;
+}
