@@ -41,13 +41,36 @@ function onIframeLoaded(event) {
     document.querySelectorAll("button[data-key]").forEach(handleButton);
 };
 
+const keyCodeMap = {
+  ArrowUp: 38,
+  ArrowDown: 40,
+  ArrowLeft: 37,
+  ArrowRight: 39,
+  Tab: 9,
+  Enter: 13,
+  Escape: 27,
+  // ...add more as needed
+};
+
+function getKeyCode(key) {
+  return keyCodeMap[key] ?? key.toUpperCase().charCodeAt(0);
+}
+
+function createCustomKeyboardEvent(type, key) {
+    const code = getKeyCode(key);
+    return new KeyboardEvent(type, {
+        key,
+        keyCode: code,    // legacy
+        which: code,      // legacy
+        bubbles: true,
+        cancelable: true,
+        composed: true
+    });
+}
+
 function sendKey(targetWindow, type, key) {
     iframe.focus();
-    const event = new KeyboardEvent(type, {
-        key,
-        bubbles: true,
-        cancelable: true
-    });
+    const event = createCustomKeyboardEvent(type, key)
     targetWindow.document.activeElement.dispatchEvent(event);
     console.log(type, key, targetWindow, iframe);
 }

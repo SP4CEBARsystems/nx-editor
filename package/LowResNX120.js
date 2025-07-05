@@ -7788,7 +7788,6 @@ var ASM_CONSTS = {
   
       var keyEventHandlerFunc = function(e) {
         assert(e);
-        console.log(`key ${e.key} ${e.code} ${e.char} ${e.locale} ${e.charCode}`, e);
   
         var keyEventData = JSEvents.keyEvent;
         var idx = keyEventData >> 2;
