@@ -10,90 +10,36 @@ main {
 }
 
 #outer {
-    width: 100%;
     aspect-ratio: 5/4;
-    /* height: auto; */
-    resize: both;
     overflow: hidden;
 }
 
-#player {
-    transform-origin: top left;
-}
-
-/* --scale-x: calc(100vw / 640px);
---scale-y: calc(100vw / 512px); */
-/* .iframe-container {
-    width: calc(640px * 1.5);
-    height: calc(512px * 1.5);
-    overflow: visible;
-} */
-
-/* align-items: center;
-justify-content: center; */
-/* .debugger {
-    flex-direction: row;
+.debugger {
+    width: 100%;
     display: flex;
     gap: 16px;
+    flex-direction: row;
 }
 
-.debugger > * {
+.viewer {
+    min-width: 10px;
+}
+
+@media (max-width: 800px) {
+    .debugger {
+        flex-direction: column;
+    }
+}
+
+/* .debugger > * {
     flex: 1;
 } */
 
 iframe {
     display: block;
-    /* width: 100%; */
-    /* aspect-ratio: 20 / 16; */
-    width:640px;
-    height:512px;
     transform-origin: top left;
-    transform: scale(1);
     border: none;
-    /* height: auto; */
-    /* height: fit-content; */
-    /* object-fit: contain; */
-    /* width: 1000px; */
-    /* height: 600px; */
-    /* height: 1000px; */
-    /* transform-origin: 0 0; */
-    
-    /* --scale-x: calc(100vw / 640px);
-    --scale-y: calc(100vw / 512px);
-    transform: scale(var(--scale-x)); */
-    /* transform: scale(1.5); */
 }
-
-/* @media (max-width: 800px) {
-    .debugger {
-        flex-direction: column;
-    } */
-    
-    
-    @media (max-width: 656px) {
-        iframe {
-            transform: scale(0.75);
-        }
-    }
-    
-    @media (max-width: 496px) {
-        iframe {
-            transform: scale(0.5);
-        }
-    }
-    
-    @media (max-width: 324px) {
-        iframe {
-            transform: scale(0.25);
-        }
-    }
-    
-    @media (min-width: 977px) {
-        iframe {
-            transform: scale(1);
-        }
-    }
-/* } */
 
 a {
     color: #00FFFF;
