@@ -35,6 +35,9 @@ main {
     .debugger {
         flex-direction: column;
     }
+    #basic-code {
+        width: 100%;
+    }
 }
 
 /* .debugger > * {
