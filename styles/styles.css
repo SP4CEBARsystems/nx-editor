@@ -25,6 +25,12 @@ main {
     min-width: 10px;
 }
 
+.editor {
+    margin-bottom: 1em;
+    padding: 1em;
+    border: 1px solid rgb(204, 204, 204);
+}
+
 @media (max-width: 800px) {
     .debugger {
         flex-direction: column;

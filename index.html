@@ -15,7 +15,7 @@
 				<p>An <i>unofficial</i> online code editor for the <a href="https://lowresnx.inutilis.com/" target="_blank" rel="noopener noreferrer">LowRes NX Fantasy Console</a></p>
 			</header>
 			<section class="debugger">
-				<div class="editor" style="margin-bottom: 1em; padding: 1em; border: 1px solid rgb(204, 204, 204);">
+				<section class="editor">
 					<textarea id="basic-code" rows="10" cols="60" placeholder="Enter BASIC code here...">PRINT "HELLO WORLD"
 TOUCHSCREEN
 DO
@@ -24,8 +24,8 @@ DO
 LOOP</textarea>
 					<br>
 					<button id="runShowPlayer">Run Custom Code</button>
-				</div>
-				<div class="viewer" class="grid">
+				</section>
+				<section class="viewer" class="grid">
 					<div class="iframe-container" id="outer">
 						<iframe id="player" width="640" height="512" allow="fullscreen"></iframe>
 					</div>
@@ -55,7 +55,7 @@ LOOP</textarea>
 							</div>
 						</div>
 					</section>
-				</div>
+				</section>
 			</section>
 			<footer>
 				<a href="https://lowresnx.inutilis.com/posting.php?mode=nt&type=program" target="_blank" rel="noopener noreferrer">Post To NX</a>
