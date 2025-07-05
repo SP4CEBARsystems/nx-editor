@@ -70,6 +70,12 @@ iframe {
         }
     }
     
+    @media (max-width: 324px) {
+        iframe {
+            transform: scale(0.25);
+        }
+    }
+    
     @media (min-width: 977px) {
         iframe {
             transform: scale(1);
@@ -89,4 +95,18 @@ a:hover {
 
 a:active {
     color: #007f7f;
+}
+
+textarea {
+    max-width: 100%;
+}
+
+footer {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+footer a {
+    min-width: 5rem;
 }
