@@ -10,18 +10,19 @@ main {
 }
 
 #outer {
-    width: 100%;
     aspect-ratio: 5/4;
-    /* height: auto; */
-    resize: both;
     overflow: hidden;
 }
 
-
 .debugger {
+    width: 100%;
     display: flex;
     gap: 16px;
     flex-direction: row;
+}
+
+.viewer {
+    min-width: 10px;
 }
 
 @media (max-width: 800px) {
