@@ -9,6 +9,18 @@ main {
     margin-inline: auto;
 }
 
+#outer {
+    width: 100%;
+    aspect-ratio: 5/4;
+    /* height: auto; */
+    resize: both;
+    overflow: hidden;
+}
+
+#player {
+    transform-origin: top left;
+}
+
 /* --scale-x: calc(100vw / 640px);
 --scale-y: calc(100vw / 512px); */
 /* .iframe-container {
