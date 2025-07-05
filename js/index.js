@@ -1,8 +1,10 @@
+import { initButtons } from './buttons.js';
 import IframeResizer from "./IframeResizer.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     const runShowPlayerElement = document.getElementById('runShowPlayer');
     runShowPlayerElement?.addEventListener('click', showPlayer);
+    initButtons();
     new IframeResizer();
     showPlayer();
 });
