@@ -68,3 +68,51 @@ footer {
 footer a {
     min-width: 5rem;
 }
+
+.joystick-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.joystick {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px; /* optional spacing between buttons */
+  /* width: 200px; */
+  /* height: 200px; */
+  place-items: center; /* center content inside each grid cell */
+}
+
+.joystick > button {
+    width: 100%;
+    height: 100%;
+}
+
+.joystick > .up {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.joystick > .left {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.joystick > .right {
+    grid-row: 2;
+    grid-column: 3;
+}
+
+.joystick > .down {
+    grid-row: 3;
+    grid-column: 2;
+}
+
+.buttons {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
