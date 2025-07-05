@@ -79,17 +79,22 @@ footer a {
     margin-top: 1rem;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: 1rem;
+    width: 100%;
+}
+
+.side {
+    width: 10rem;
 }
 
 .joystick {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 10px; /* optional spacing between buttons */
-  /* width: 200px; */
-  /* height: 200px; */
-  place-items: center; /* center content inside each grid cell */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px; /* optional spacing between buttons */
+    place-items: center; /* center content inside each grid cell */
+    aspect-ratio: 1;
 }
 
 .joystick > button {
@@ -121,4 +126,6 @@ footer a {
     margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    height: 3rem;
 }
