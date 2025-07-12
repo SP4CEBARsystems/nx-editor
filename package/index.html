@@ -29,25 +29,53 @@
       const p = params.get("p");
       console.log(p);
 
-      const readFilesFromFS = () => {
-        console.log(FS.root.contents);
-        // const file = FS.readFile(`/blob:http:/127.0.0.1:5501/${'7b8a79d4-298b-48dc-9bf0-ea871449096c'}`);
-        const file = FS.readFile(p.replace(/\/\//g, "/"));
-        // const file = FS.readFile('/Gfx Designer 2.0.nx');
-        console.log(file);
-        console.log(file.map(uinteger=>String.fromCharCode(uinteger)));
-        const decoder = new TextDecoder("utf-8");
-        const text = decoder.decode(file);
-        console.log(text); // Output: "'TITLE:  
+      const fetchTextFile = async (path = './example.txt') => {
+        return fetch(path)  // File must be in the same directory as your HTML/JS
+          .then(response => response.text())
       }
 
-      setTimeout(readFilesFromFS, 5000);
+      const createFilesInFS = () => {
+        // FS.writeFile('/Gfx Designer 2.0.nx', gfxDesignerBytes);
+
+        fetchTextFile('./Disk.nx')
+          .then(text => {
+            console.log('File content as string:\n', text);
+          })
+          .catch(error => {
+            console.error('Failed to load file:', error);
+          });
+          
+          const text = `
+          #1:MAIN PALETTES
+          01
+          `; // e.g., from AJAX or elsewhere
+          const encoder = new TextEncoder();
+          const diskBytes = encoder.encode(text); // Uint8Array
+          FS.writeFile('/Disk.nx', diskBytes);
+          setTimeout(readFilesFromFS, 5000);
+      }
+      const readFilesFromFS = () => {
+        console.log(FS.readdir('/'));
+        console.log(FS.root);
+        console.log(FS.root.contents);
+        const files = [
+          FS.readFile(p.replace(/\/\//g, "/")),
+          // FS.readFile('/Gfx Designer 2.0.nx'),
+          FS.readFile('/Disk.nx'),
+        ];
+        console.log(files);
+        const decoder = new TextDecoder("utf-8");
+        const texts = files.map((file) => decoder.decode(file));
+        console.log(texts); // Output: "'TITLE:  
+      }
+
+      setTimeout(createFilesInFS, 5000);
 
       var Module = {
         canvas: document.getElementById('canvas'),
         arguments: [
-          // "Gfx Designer 2.0.nx",
-          // "Disk.nx",
+          "Gfx Designer 2.0.nx",
+          "Disk.nx",
           p,
         ],
         print: function(t) {
