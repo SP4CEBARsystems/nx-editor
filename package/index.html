@@ -40,10 +40,6 @@
         fetchTextFile('./Disk.nx')
           .then(text => {
             console.log('File content as string:\n', text);
-            // const text = `
-            // #1:MAIN PALETTES
-            // 01
-            // `;
             const encoder = new TextEncoder();
             const diskBytes = encoder.encode(text); // Uint8Array
             FS.writeFile('/Disk.nx', diskBytes);
