@@ -18,7 +18,6 @@ export default class CodeSaver {
         this.downloadBtn = document.getElementById(downloadBtnId);
         this.storageKey = storageKey;
         this.lastSavedText = '';
-
         this.loadText();
         this.attachEvents();
     }
@@ -57,7 +56,6 @@ export default class CodeSaver {
         link.href = URL.createObjectURL(blob);
         link.download = 'my_program.nx';
         link.click();
-
         this.markAsSaved();
     }
 
@@ -79,26 +77,26 @@ export default class CodeSaver {
     }
 
     /**
+     * Warns if unsaved changes are found
+     * @param {BeforeUnloadEvent} e 
+     */
+    beforeUnloadHandler(e) {
+        if (this.hasUnsavedChanges()) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    }
+
+    /**
      * Attaches event listeners for saving, downloading, and unload warning.
      * @returns {void}
      */
     attachEvents() {
         // Save to localStorage on input
-        this.textarea.addEventListener('input', () => {
-            this.saveToLocalStorage();
-        });
-
+        this.textarea.addEventListener('input', this.saveToLocalStorage.bind(this));
         // Handle download button click
-        this.downloadBtn.addEventListener('click', () => {
-            this.downloadTextAsFile();
-        });
-
+        this.downloadBtn.addEventListener('click', this.downloadTextAsFile.bind(this));
         // Warn on page unload if there are unsaved changes
-        window.addEventListener('beforeunload', (e) => {
-            if (this.hasUnsavedChanges()) {
-                e.preventDefault();
-                e.returnValue = '';
-            }
-        });
+        window.addEventListener('beforeunload', this.beforeUnloadHandler.bind(this));
     }
 }
