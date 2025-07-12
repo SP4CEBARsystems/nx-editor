@@ -11,11 +11,15 @@ export default class CodeSaver {
      * Creates an instance of CodeSaver.
      * @param {string} textareaId - The ID of the textarea element.
      * @param {string} downloadBtnId - The ID of the download button element.
+     * @param {string} uploadBtnId - The key for localStorage.
+     * @param {string} uploadInputId - The key for localStorage.
      * @param {string} [storageKey='unsavedText'] - The key for localStorage.
      */
-    constructor(textareaId, downloadBtnId, storageKey = 'unsavedText') {
+    constructor(textareaId, downloadBtnId, uploadBtnId, uploadInputId, storageKey = 'unsavedText') {
         this.textarea = document.getElementById(textareaId);
         this.downloadBtn = document.getElementById(downloadBtnId);
+        this.uploadBtn = document.getElementById(uploadBtnId);
+        this.uploadInput = document.getElementById(uploadInputId);
         this.storageKey = storageKey;
         this.lastSavedText = '';
         this.loadText();
@@ -76,6 +80,17 @@ export default class CodeSaver {
         return currentText.trim().length > 0 && currentText !== this.lastSavedText;
     }
 
+    handleFileUpload(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            this.textarea.value = e.target.result;
+            this.markAsSaved();
+            this.saveToLocalStorage();
+        };
+        reader.readAsText(file);
+    }
+
+
     /**
      * Warns if unsaved changes are found
      * @param {BeforeUnloadEvent} e 
@@ -98,5 +113,21 @@ export default class CodeSaver {
         this.downloadBtn.addEventListener('click', this.downloadTextAsFile.bind(this));
         // Warn on page unload if there are unsaved changes
         window.addEventListener('beforeunload', this.beforeUnloadHandler.bind(this));
+
+        if (this.uploadBtn && this.uploadInput) {
+            this.uploadBtn.addEventListener('click', () => {
+                this.uploadInput.click();
+            });
+
+            this.uploadInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file && file.name.endsWith('.nx')) {
+                    this.handleFileUpload(file);
+                } else {
+                    alert('Please upload a valid .nx file');
+                }
+                e.target.value = ''; // Reset input so re-selecting the same file works
+            });
+        }
     }
 }

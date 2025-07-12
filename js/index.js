@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     runShowPlayerElement?.addEventListener('click', showPlayer);
     initButtons();
     new IframeResizer();
-    new CodeSaver('basic-code', 'download-button');
+    new CodeSaver('basic-code', 'download-button', 'uploadBtn', 'uploadInput');
     showPlayer();
 });
 
