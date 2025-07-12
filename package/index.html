@@ -34,39 +34,43 @@
           .then(response => response.text())
       }
 
-      const createFilesInFS = () => {
-        // FS.writeFile('/Gfx Designer 2.0.nx', gfxDesignerBytes);
+        const createFilesInFS = () => {
+          // FS.writeFile('/Gfx Designer 2.0.nx', gfxDesignerBytes);
 
-        fetchTextFile('./Disk.nx')
-          .then(text => {
-            console.log('File content as string:\n', text);
-            const encoder = new TextEncoder();
-            const diskBytes = encoder.encode(text); // Uint8Array
-            FS.writeFile('/Disk.nx', diskBytes);
-            setTimeout(readFilesFromFS, 1);
-          })
-          .catch(error => {
-            console.error('Failed to load file:', error);
-          });
-      }
-      const readFilesFromFS = () => {
-        console.log(FS.readdir('/'));
-        console.log(FS.root);
-        console.log(FS.root.contents);
-        const files = [
-          FS.readFile(p.replace(/\/\//g, "/")),
-          // FS.readFile('/Gfx Designer 2.0.nx'),
-          FS.readFile('/Disk.nx'),
-        ];
-        console.log(files);
-        const decoder = new TextDecoder("utf-8");
-        const texts = files.map((file) => decoder.decode(file));
+          fetchTextFile('./Disk.nx')
+            .then(text => {
+              console.log('File content as string:\n', text);
+              const encoder = new TextEncoder();
+              const diskBytes = encoder.encode(text); // Uint8Array
+              FS.writeFile('/Disk.nx', diskBytes);
+            })
+            .catch(error => {
+              console.error('Failed to load file:', error);
+            });
+        }
+        const readFilesFromFS = () => {
+          console.log(FS.readdir('/'));
+          console.log(FS.root);
+          console.log(FS.root.contents);
+          const files = [
+            FS.readFile(p.replace(/\/\//g, "/")),
+            // FS.readFile('/Gfx Designer 2.0.nx'),
+            FS.readFile('/Disk.nx'),
+          ];
+          console.log(files);
+          const decoder = new TextDecoder("utf-8");
+          const texts = files.map((file) => decoder.decode(file));
         console.log(texts); // Output: "'TITLE:  
       }
-
-      setTimeout(createFilesInFS, 2000);
+      
+      setTimeout(readFilesFromFS, 5000);
 
       var Module = {
+        preRun: [
+          function() {
+            createFilesInFS();
+          }
+        ],
         canvas: document.getElementById('canvas'),
         arguments: [
           // "Gfx Designer 2.0.nx",
