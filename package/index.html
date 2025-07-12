@@ -27,6 +27,21 @@
     <script type='text/javascript'>
       const params = new URLSearchParams(window.location.search);
       const p = params.get("p");
+      console.log(p);
+
+      const readFilesFromFS = () => {
+        console.log(FS.root.contents);
+        // const file = FS.readFile(`/blob:http:/127.0.0.1:5501/${'7b8a79d4-298b-48dc-9bf0-ea871449096c'}`);
+        const file = FS.readFile(p.replace(/\/\//g, "/"));
+        // const file = FS.readFile('/Gfx Designer 2.0.nx');
+        console.log(file);
+        console.log(file.map(uinteger=>String.fromCharCode(uinteger)));
+        const decoder = new TextDecoder("utf-8");
+        const text = decoder.decode(file);
+        console.log(text); // Output: "'TITLE:  
+      }
+
+      setTimeout(readFilesFromFS, 5000);
 
       var Module = {
         canvas: document.getElementById('canvas'),
@@ -49,18 +64,6 @@
         }
       }
       document.addEventListener('keydown', onKeyDown_blocker, false);
-      console.log(p);
-      setTimeout(() => {
-        console.log(FS.root.contents);
-        // const file = FS.readFile(`/blob:http:/127.0.0.1:5501/${'7b8a79d4-298b-48dc-9bf0-ea871449096c'}`);
-        const file = FS.readFile(p.replace(/\/\//g, "/"));
-        // const file = FS.readFile('/Gfx Designer 2.0.nx');
-        console.log(file);
-        console.log(file.map(uinteger=>String.fromCharCode(uinteger)));
-        const decoder = new TextDecoder("utf-8");
-        const text = decoder.decode(file);
-        console.log(text); // Output: "'TITLE:  
-      }, 5000);
     </script>
     <script async type="text/javascript" src="LowResNX120.js"></script>
   </body>
