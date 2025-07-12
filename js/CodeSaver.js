@@ -28,9 +28,13 @@ export default class CodeSaver {
      * @returns {void}
      */
     loadText() {
-        const savedText = localStorage.getItem(this.storageKey) || '';
-        this.textarea.value = savedText;
-        this.lastSavedText = savedText;
+        const savedText = localStorage.getItem(this.storageKey);
+        if (savedText === null || savedText === '') {
+            this.lastSavedText = this.textarea.value ?? '';
+        } else {
+            this.textarea.value = savedText;
+            this.lastSavedText = savedText;
+        }
     }
 
     /**
@@ -51,7 +55,7 @@ export default class CodeSaver {
         const blob = new Blob([text], { type: 'text/plain' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'my_text.txt';
+        link.download = 'my_program.nx';
         link.click();
 
         this.markAsSaved();
