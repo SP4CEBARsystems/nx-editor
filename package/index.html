@@ -43,7 +43,7 @@
             const encoder = new TextEncoder();
             const diskBytes = encoder.encode(text); // Uint8Array
             FS.writeFile('/Disk.nx', diskBytes);
-            setTimeout(readFilesFromFS, 5000);
+            setTimeout(readFilesFromFS, 1);
           })
           .catch(error => {
             console.error('Failed to load file:', error);
@@ -64,13 +64,13 @@
         console.log(texts); // Output: "'TITLE:  
       }
 
-      setTimeout(createFilesInFS, 5000);
+      setTimeout(createFilesInFS, 2000);
 
       var Module = {
         canvas: document.getElementById('canvas'),
         arguments: [
-          "Gfx Designer 2.0.nx",
-          "Disk.nx",
+          // "Gfx Designer 2.0.nx",
+          // "Disk.nx",
           p,
         ],
         print: function(t) {
