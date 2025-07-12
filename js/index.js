@@ -1,4 +1,5 @@
 import { initButtons } from './buttons.js';
+import CodeSaver from './CodeSaver.js';
 import IframeResizer from "./IframeResizer.js";
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -6,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     runShowPlayerElement?.addEventListener('click', showPlayer);
     initButtons();
     new IframeResizer();
+    new CodeSaver('basic-code', 'download-button');
     showPlayer();
 });
 

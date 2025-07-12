@@ -132,3 +132,12 @@ footer a {
     gap: 1rem;
     height: 3rem;
 }
+
+button {
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+#runShowPlayer {
+    background-color: #00FFFF;
+}
