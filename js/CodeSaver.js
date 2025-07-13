@@ -55,10 +55,10 @@ export default class CodeSaver {
      */
     downloadTextAsFile() {
         const text = this.textarea.value;
-        const blob = new Blob([text], { type: 'text/plain' });
+        const blob = new Blob([text], { type: 'application/octet-stream' });
         const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
         link.download = 'my_program.nx';
+        link.href = URL.createObjectURL(blob);
         link.click();
         this.markAsSaved();
     }
