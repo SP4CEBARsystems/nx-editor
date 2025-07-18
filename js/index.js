@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const codeSaver = new CodeSaver('basic-code', 'download-button', 'uploadBtn', 'uploadInput');
     scraper()
     .then(() => codeSaver.markAsSaved())
-    .catch(error => console.log(error))
+    .catch(console.error)
     .finally(() => {
         showPlayer();
         console.log('player shown');
