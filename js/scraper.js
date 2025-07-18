@@ -47,7 +47,12 @@ async function fetchText(url){
 }
 
 async function loadTopNxUrl(param){
-    const url = await getTopNxUrl(param);
+    let url;
+    if (/^https:\/\/lowresnx\.inutilis\.com\/topic\.php\?id=\d+$/.test(param)) {
+        url = await getTopNxUrl(param);
+    } else {
+        url = param;
+    }
     return await fetchTextWithProxy(url);
 }
 
