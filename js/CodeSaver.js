@@ -90,7 +90,6 @@ export default class CodeSaver {
         reader.readAsText(file);
     }
 
-
     /**
      * Warns if unsaved changes are found
      * @param {BeforeUnloadEvent} e 

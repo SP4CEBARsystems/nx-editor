@@ -4,17 +4,18 @@ import IframeResizer from "./IframeResizer.js";
 import scraper from './scraper.js';
 
 document.addEventListener("DOMContentLoaded", function() {
-    scraper()
-        .catch(error => console.log(error))
-        .finally(() => {
-            showPlayer();
-            console.log("player shown");
-        });
     const runShowPlayerElement = document.getElementById('runShowPlayer');
     runShowPlayerElement?.addEventListener('click', showPlayer);
     initButtons();
     new IframeResizer();
-    new CodeSaver('basic-code', 'download-button', 'uploadBtn', 'uploadInput');
+    const codeSaver = new CodeSaver('basic-code', 'download-button', 'uploadBtn', 'uploadInput');
+    scraper()
+    .then(() => codeSaver.markAsSaved())
+    .catch(error => console.log(error))
+    .finally(() => {
+        showPlayer();
+        console.log('player shown');
+    });
 });
 
 function showPlayer() {
