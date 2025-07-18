@@ -1,14 +1,21 @@
 import { initButtons } from './buttons.js';
 import CodeSaver from './CodeSaver.js';
 import IframeResizer from "./IframeResizer.js";
+import scraper from './scraper.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     const runShowPlayerElement = document.getElementById('runShowPlayer');
     runShowPlayerElement?.addEventListener('click', showPlayer);
     initButtons();
     new IframeResizer();
-    new CodeSaver('basic-code', 'download-button', 'uploadBtn', 'uploadInput');
-    showPlayer();
+    const codeSaver = new CodeSaver('basic-code', 'download-button', 'uploadBtn', 'uploadInput');
+    scraper()
+    .then(() => codeSaver.markAsSaved())
+    .catch(console.error)
+    .finally(() => {
+        showPlayer();
+        console.log('player shown');
+    });
 });
 
 function showPlayer() {
