@@ -14,13 +14,13 @@
 				<h1>NX Editor</h1>
 				<p>An <i>unofficial</i> online code editor for the <a href="https://lowresnx.inutilis.com/" target="_blank" rel="noopener noreferrer">LowRes NX Fantasy Console</a></p>
 			</header>
-			<section class="debugger">
-				<div class="resize-container">
-					<div class="resize-left">Resizable Left Pane</div>
-					<div class="resizer" id="resizer"></div>
-					<div class="resize-right">Right Pane Shrinks</div>
-				</div>
-				<section class="editor">
+			<!-- <div class="resize-container">
+				<div class="resize-left">Resizable Left Pane</div>
+				<div class="resizer" id="resizer"></div>
+				<div class="resize-right">Right Pane Shrinks</div>
+			</div> -->
+			<section class="debugger" class="resize-container">
+				<section class="editor" class="resize-left">
 					<div class="textareaWrapper">
 						<div class="line-numbers" id="lineNumbers">
 							<span>1</span>
@@ -38,7 +38,8 @@ LOOP</textarea>
 					<button id="uploadBtn">Open</button>
 					<input type="file" id="uploadInput" accept=".nx" style="display: none;">
 				</section>
-				<section class="viewer" class="grid">
+				<div class="resizer" id="resizer"></div>
+				<section class="viewer" class="grid" class="resize-right">
 					<div class="iframe-container" id="outer">
 						<iframe id="player" width="640" height="512" allow="fullscreen"></iframe>
 					</div>
