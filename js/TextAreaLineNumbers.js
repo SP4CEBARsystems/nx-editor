@@ -3,7 +3,7 @@ import { mustGetElementById } from "./index.js";
 /**
  * TextAreaLineNumbers provides dynamic line numbering for a textarea element,
  * including support for wrapped lines. It synchronizes line numbers with the
- * textarea's content and scroll position, and can copy styles to a mirror element
+ * textarea's content and scroll position
  * for accurate measurement.
  *
  * @class
@@ -11,14 +11,12 @@ import { mustGetElementById } from "./index.js";
  * // HTML:
  * // <textarea id="editor"></textarea>
  * // <div id="lineNumbers"></div>
- * // <div id="mirror" style="visibility:hidden;position:absolute;"></div>
  * //
  * // JS:
  * // const lineNumbers = new TextAreaLineNumbers("editor", "lineNumbers");
  *
  * @property {HTMLTextAreaElement} textarea - The textarea element being monitored.
  * @property {HTMLElement} lineNumbers - The container for displaying line numbers.
- * @property {HTMLElement} mirror - A hidden element used for measuring text dimensions.
  *
  * @throws {Error} If required elements are not found.
  *
@@ -31,9 +29,6 @@ export default class TextAreaLineNumbers {
     /** @type {HTMLElement} */
     lineNumbers;
 
-    /** @type {HTMLElement} */
-    mirror;
-
     /** @type {number} */
     charWidth;
 
@@ -45,7 +40,6 @@ export default class TextAreaLineNumbers {
     constructor(...ids) {
         [this.textarea, this.lineNumbers] = /** @type {[HTMLTextAreaElement, HTMLElement]} */
             (ids.map(mustGetElementById));
-        this.mirror = mustGetElementById("mirror");
 
         this.charWidth = this.measureCharWidth();
         this.textarea.addEventListener("input", this.updateLineNumbers.bind(this));
@@ -133,8 +127,6 @@ export default class TextAreaLineNumbers {
 
         for (let i = 0; i < lines.length; i++) {
             const lineText = lines[i] || " ";
-            this.mirror.textContent = lineText;
-            const height = this.mirror.scrollHeight;
             // const wraps = Math.round(height / lineHeight) || 1;
             // const wraps = Math.floor(lineText.length / this.getCharactersPerLine()) + 1;
             const wraps = this.calculateWraps(lineText);
