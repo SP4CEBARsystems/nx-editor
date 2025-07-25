@@ -11,6 +11,9 @@ export default class TextAreaLineNumbers {
     /** @type {HTMLElement} */
     lineNumbers;
 
+    /** @type {HTMLElement} */
+    mirror;
+
     /**
      * Initializes the TextAreaLineNumbers instance.
      * @throws {Error} If required elements are not found.
@@ -19,8 +22,12 @@ export default class TextAreaLineNumbers {
     constructor(...ids) {
         [this.textarea, this.lineNumbers] = /** @type {[HTMLTextAreaElement, HTMLElement]} */
             (ids.map(mustGetElementById));
+        this.mirror = mustGetElementById("mirror");
+
+        this.copyStyles();
         this.textarea.addEventListener("input", this.updateLineNumbers.bind(this));
         this.textarea.addEventListener("scroll", this.syncScroll.bind(this));
+        window.addEventListener("resize", this.updateLineNumbers.bind(this));
 
         this.updateLineNumbers();
     }
@@ -30,15 +37,45 @@ export default class TextAreaLineNumbers {
     }
 
     /**
+     * Copy computed styles from the textarea to the mirror div.
+     */
+    copyStyles() {
+        const style = getComputedStyle(this.textarea);
+        const propertiesToCopy = [
+            "font", "padding", "border", "boxSizing", "lineHeight",
+            "whiteSpace", "wordWrap", "letterSpacing", "width"
+        ];
+
+        for (const prop of propertiesToCopy) {
+            this.mirror.style[prop] = style[prop];
+        }
+
+        this.mirror.style.whiteSpace = "pre-wrap";
+        this.mirror.style.wordWrap = "break-word";
+        this.mirror.style.overflowWrap = "break-word";
+    }
+
+    /**
      * Updates the line numbers, including wrapped lines.
      */
     updateLineNumbers() {
         const lines = this.getLineCount();
         this.lineNumbers.innerHTML = "";
-        for (let i = 1; i <= lines.length; i++) {
-            const line = document.createElement("span");
-            line.textContent = i.toString();
-            this.lineNumbers.appendChild(line);
+
+        const lineHeight = parseFloat(getComputedStyle(this.textarea).lineHeight || "16");
+
+        for (let i = 0; i < lines.length; i++) {
+            const lineText = lines[i] || " ";
+            this.mirror.textContent = lineText;
+
+            const height = this.mirror.scrollHeight;
+            const wraps = Math.round(height / lineHeight) || 1;
+
+            for (let j = 0; j < wraps; j++) {
+                const line = document.createElement("span");
+                line.textContent = (i + 1).toString();
+                this.lineNumbers.appendChild(line);
+            }
         }
     }
 
