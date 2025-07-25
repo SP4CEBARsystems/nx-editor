@@ -1,19 +1,20 @@
 import { mustGetElementById } from "./index.js";
 
 /**
- * Class for managing line numbers for a textarea element.
+ * Class for managing line numbers for a textarea element,
+ * including support for wrapped lines.
  */
 export default class TextAreaLineNumbers {
     /** @type {HTMLTextAreaElement} */
-    textarea
+    textarea;
 
     /** @type {HTMLElement} */
-    lineNumbers
+    lineNumbers;
 
     /**
      * Initializes the TextAreaLineNumbers instance.
      * @throws {Error} If required elements are not found.
-     * @param {[string, string]} ids
+     * @param {[string, string]} ids - [textareaId, lineNumberContainerId]
      */
     constructor(...ids) {
         [this.textarea, this.lineNumbers] = /** @type {[HTMLTextAreaElement, HTMLElement]} */
@@ -21,27 +22,26 @@ export default class TextAreaLineNumbers {
         this.textarea.addEventListener("input", this.updateLineNumbers.bind(this));
         this.textarea.addEventListener("scroll", this.syncScroll.bind(this));
 
-        // Initial draw
         this.updateLineNumbers();
     }
 
     getLineCount() {
-        return this.textarea.value.split("\n").length;
+        return this.textarea.value.split("\n");
     }
 
     /**
-     * Updates the line numbers to match the number of lines in the textarea.
+     * Updates the line numbers, including wrapped lines.
      */
     updateLineNumbers() {
-        const totalLines = this.getLineCount();
+        const lines = this.getLineCount();
         this.lineNumbers.innerHTML = "";
-        for (let i = 1; i <= totalLines; i++) {
+        for (let i = 1; i <= lines.length; i++) {
             const line = document.createElement("span");
             line.textContent = i.toString();
             this.lineNumbers.appendChild(line);
         }
     }
-    
+
     /**
      * Synchronizes the scroll position of the line numbers with the textarea.
      */
@@ -49,4 +49,3 @@ export default class TextAreaLineNumbers {
         this.lineNumbers.scrollTop = this.textarea.scrollTop;
     }
 }
-
