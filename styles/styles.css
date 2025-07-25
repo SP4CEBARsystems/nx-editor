@@ -142,3 +142,36 @@ button {
     background-color: #00FFFF;
     margin-right: 1rem;
 }
+
+ .textareaWrapper {
+    display: flex;
+    font-family: monospace;
+    border: 1px solid #ccc;
+    width: 600px;
+    height: 300px;
+}
+
+.line-numbers {
+    background-color: #f0f0f0;
+    color: #888;
+    padding: 4px 8px;
+    text-align: right;
+    user-select: none;
+    overflow: hidden;
+}
+
+.line-numbers span {
+    display: block;
+    height: 1.2em;
+}
+
+/* textarea {
+    flex-grow: 1;
+    border: none;
+    padding: 4px;
+    resize: none;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.2em;
+    outline: none;
+} */

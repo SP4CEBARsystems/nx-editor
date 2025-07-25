@@ -2,6 +2,7 @@ import { initButtons } from './buttons.js';
 import CodeSaver from './CodeSaver.js';
 import IframeResizer from "./IframeResizer.js";
 import scraper from './scraper.js';
+import TextAreaLineNumbers from './TextAreaLineNumbers.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     const runShowPlayerElement = document.getElementById('runShowPlayer');
@@ -10,12 +11,13 @@ document.addEventListener("DOMContentLoaded", function() {
     new IframeResizer();
     const codeSaver = new CodeSaver('basic-code', 'download-button', 'uploadBtn', 'uploadInput');
     scraper()
-    .then(() => codeSaver.markAsSaved())
-    .catch(console.error)
-    .finally(() => {
-        showPlayer();
-        console.log('player shown');
-    });
+        .then(() => codeSaver.markAsSaved())
+        .catch(console.error)
+        .finally(() => {
+            showPlayer();
+            console.log('player shown');
+        });
+    new TextAreaLineNumbers('basic-code', 'lineNumbers');
 });
 
 function showPlayer() {

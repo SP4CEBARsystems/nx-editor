@@ -16,12 +16,17 @@
 			</header>
 			<section class="debugger">
 				<section class="editor">
-					<textarea id="basic-code" rows="25" cols="50" placeholder="Enter BASIC code here...">PRINT "HELLO WORLD"
+					<div class="textareaWrapper">
+						<div class="line-numbers" id="lineNumbers">
+							<span>1</span>
+						</div>
+						<textarea id="basic-code" rows="25" cols="50" placeholder="Enter BASIC code here...">PRINT "HELLO WORLD"
 TOUCHSCREEN
 DO
-  SPRITE 0, TOUCH.X-4, TOUCH.Y-4, 193
-  WAIT VBL
+	SPRITE 0, TOUCH.X-4, TOUCH.Y-4, 193
+	WAIT VBL
 LOOP</textarea>
+					</div>
 					<br>
 					<button id="runShowPlayer">Run</button>
   					<button id="download-button">Save</button>
