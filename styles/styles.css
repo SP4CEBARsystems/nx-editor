@@ -64,10 +64,6 @@ a:active {
     color: #007f7f;
 }
 
-textarea {
-    max-width: 100%;
-}
-
 footer {
     display: flex;
     gap: 1rem;
@@ -143,12 +139,14 @@ button {
     margin-right: 1rem;
 }
 
- .textareaWrapper {
+.textareaWrapper {
     display: flex;
     font-family: monospace;
     border: 1px solid #ccc;
-    width: 600px;
-    height: 300px;
+    width: 100%;
+    height: 50rem;
+    /* width: 600px;
+    height: 300px; */
 }
 
 .line-numbers {
@@ -165,16 +163,20 @@ button {
     height: 1.2em;
 }
 
-/* textarea {
+textarea {
+    /* max-width: 100%; */
+    width: 100%;
+    resize: none;
     flex-grow: 1;
     border: none;
+    /* 
     padding: 4px;
-    resize: none;
     font-family: inherit;
     font-size: 14px;
     line-height: 1.2em;
     outline: none;
-} */
+    */
+}
 
 * {
     box-sizing: border-box;
