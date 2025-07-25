@@ -18,21 +18,26 @@ export default class TextAreaLineNumbers {
     constructor(...ids) {
         [this.textarea, this.lineNumbers] = /** @type {[HTMLTextAreaElement, HTMLElement]} */
             (ids.map(mustGetElementById));
-        this.textarea.oninput = this.updateLineNumbers.bind(this);
-        this.textarea.onscroll = this.syncScroll.bind(this);
-        // Initialize line numbers on load
+        this.textarea.addEventListener("input", this.updateLineNumbers.bind(this));
+        this.textarea.addEventListener("scroll", this.syncScroll.bind(this));
+
+        // Initial draw
         this.updateLineNumbers();
+    }
+
+    getLineCount() {
+        return this.textarea.value.split("\n").length;
     }
 
     /**
      * Updates the line numbers to match the number of lines in the textarea.
      */
     updateLineNumbers() {
-        const lines = this.textarea.value.split("\n").length;
+        const totalLines = this.getLineCount();
         this.lineNumbers.innerHTML = "";
-        for (let i = 1; i <= lines; i++) {
+        for (let i = 1; i <= totalLines; i++) {
             const line = document.createElement("span");
-            line.textContent = i;
+            line.textContent = i.toString();
             this.lineNumbers.appendChild(line);
         }
     }
