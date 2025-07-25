@@ -175,3 +175,44 @@ button {
     line-height: 1.2em;
     outline: none;
 } */
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.resize-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.resize-left,
+.resize-right {
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+}
+
+.resize-left {
+    background: #f2f2f2;
+    width: 50%;
+}
+
+.resize-right {
+    background: #dfe6e9;
+    flex: 1; /* Fills remaining space */
+}
+
+.resizer {
+    width: 10px;
+    background: #636e72;
+    cursor: ew-resize;
+    touch-action: none; /* Prevents scrolling during touch drag */
+}
