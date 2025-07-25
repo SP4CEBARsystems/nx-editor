@@ -178,13 +178,6 @@ textarea {
     */
 }
 
-textareaMirror {
-    width: 100%;
-    resize: none;
-    flex-grow: 1;
-    border: none;
-}
-
 * {
     box-sizing: border-box;
 }

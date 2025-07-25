@@ -1,8 +1,28 @@
 import { mustGetElementById } from "./index.js";
 
 /**
- * Class for managing line numbers for a textarea element,
- * including support for wrapped lines.
+ * TextAreaLineNumbers provides dynamic line numbering for a textarea element,
+ * including support for wrapped lines. It synchronizes line numbers with the
+ * textarea's content and scroll position, and can copy styles to a mirror element
+ * for accurate measurement.
+ *
+ * @class
+ * @example
+ * // HTML:
+ * // <textarea id="editor"></textarea>
+ * // <div id="lineNumbers"></div>
+ * // <div id="mirror" style="visibility:hidden;position:absolute;"></div>
+ * //
+ * // JS:
+ * // const lineNumbers = new TextAreaLineNumbers("editor", "lineNumbers");
+ *
+ * @property {HTMLTextAreaElement} textarea - The textarea element being monitored.
+ * @property {HTMLElement} lineNumbers - The container for displaying line numbers.
+ * @property {HTMLElement} mirror - A hidden element used for measuring text dimensions.
+ *
+ * @throws {Error} If required elements are not found.
+ *
+ * @param {[string, string]} ids - Array containing the IDs of the textarea and line number container.
  */
 export default class TextAreaLineNumbers {
     /** @type {HTMLTextAreaElement} */
@@ -14,6 +34,9 @@ export default class TextAreaLineNumbers {
     /** @type {HTMLElement} */
     mirror;
 
+    /** @type {number} */
+    charWidth;
+
     /**
      * Initializes the TextAreaLineNumbers instance.
      * @throws {Error} If required elements are not found.
@@ -24,7 +47,7 @@ export default class TextAreaLineNumbers {
             (ids.map(mustGetElementById));
         this.mirror = mustGetElementById("mirror");
 
-        this.copyStyles();
+        this.charWidth = this.measureCharWidth();
         this.textarea.addEventListener("input", this.updateLineNumbers.bind(this));
         this.textarea.addEventListener("scroll", this.syncScroll.bind(this));
         window.addEventListener("resize", this.updateLineNumbers.bind(this));
@@ -37,22 +60,66 @@ export default class TextAreaLineNumbers {
     }
 
     /**
-     * Copy computed styles from the textarea to the mirror div.
+     * Calculates how many characters fit per line in the textarea.
+     * Only works correctly with monospaced fonts.
+     * this method appears to be inaccurate
+     * @returns {number}
      */
-    copyStyles() {
-        const style = getComputedStyle(this.textarea);
-        const propertiesToCopy = [
-            "font", "padding", "border", "boxSizing", "lineHeight",
-            "whiteSpace", "wordWrap", "letterSpacing", "width"
-        ];
+    getCharactersPerLine() {
+        // return 61;
+        const contentWidth = this.textarea.clientWidth; // width excluding scrollbar, borders
+        console.log('getCharactersPerLine', contentWidth / this.charWidth, contentWidth, this.charWidth)
+        return Math.floor(contentWidth / this.charWidth);
+    }
 
-        for (const prop of propertiesToCopy) {
-            this.mirror.style[prop] = style[prop];
+    /**
+     * @returns {number} the measured width of a character in a monospaced font
+     */
+    measureCharWidth() {
+        const style = getComputedStyle(this.textarea);
+        // Create a span with one character
+        const testSpan = document.createElement("span");
+        testSpan.textContent = "M"; // use a wide monospaced char
+        testSpan.style.font = style.font;
+        testSpan.style.visibility = "hidden";
+        document.body.appendChild(testSpan);
+
+        const charWidth = testSpan.getBoundingClientRect().width;
+        document.body.removeChild(testSpan);
+        return charWidth;
+    }
+
+    /**
+     * Calculates how many visual lines (wraps) a given line will occupy,
+     * assuming no word breaking and a monospaced font.
+     * @param {string} lineText
+     * @returns {number}
+     */
+    calculateWraps(lineText) {
+        const charsPerLine = this.getCharactersPerLine();
+        if (!lineText.length) return 1;
+
+        const words = lineText.split(/(\s+)/); // split by words & keep spaces
+        let lineLength = 0;
+        let wraps = 1;
+
+        for (const word of words) {
+            const wordLength = word.length;
+            if (lineLength + wordLength > charsPerLine) {
+                // If word doesn't fit, wrap
+                if (word.trim().length > 0) {
+                    wraps++;
+                    lineLength = wordLength;
+                } else {
+                    // If it's just spaces that overflow, reset line length but don't count as new line
+                    lineLength = 0;
+                }
+            } else {
+                lineLength += wordLength;
+            }
         }
 
-        this.mirror.style.whiteSpace = "pre-wrap";
-        this.mirror.style.wordWrap = "break-word";
-        this.mirror.style.overflowWrap = "break-word";
+        return wraps;
     }
 
     /**
@@ -67,13 +134,13 @@ export default class TextAreaLineNumbers {
         for (let i = 0; i < lines.length; i++) {
             const lineText = lines[i] || " ";
             this.mirror.textContent = lineText;
-
             const height = this.mirror.scrollHeight;
-            const wraps = Math.round(height / lineHeight) || 1;
-
+            // const wraps = Math.round(height / lineHeight) || 1;
+            // const wraps = Math.floor(lineText.length / this.getCharactersPerLine()) + 1;
+            const wraps = this.calculateWraps(lineText);
             for (let j = 0; j < wraps; j++) {
                 const line = document.createElement("span");
-                line.textContent = (i + 1).toString();
+                line.textContent = (j == 0) ? (i + 1).toString() : '';
                 this.lineNumbers.appendChild(line);
             }
         }
