@@ -16,7 +16,36 @@ document.addEventListener("DOMContentLoaded", function() {
         showPlayer();
         console.log('player shown');
     });
+    setupCursorCoordinatesDisplay();
 });
+
+function setupCursorCoordinatesDisplay() {
+    const colDisplay = document.getElementById("cursorDisplayColumn");
+    const lineDisplay = document.getElementById("cursorDisplayLine");
+    const textarea = /** @type {HTMLTextAreaElement} */(document.getElementById("basic-code"));
+    if (!textarea) {
+        return
+    }
+
+    textarea.addEventListener('keyup', updateCursorInfo);
+    textarea.addEventListener('click', updateCursorInfo);
+
+    function updateCursorInfo() {
+        if (!textarea || !colDisplay || !lineDisplay) {
+            return
+        }
+        const pos = textarea.selectionStart;
+        const textBeforeCursor = textarea.value.slice(0, pos);
+
+        // Count lines
+        const lines = textBeforeCursor.split('\n');
+        const line = lines.length; // line number starts from 1
+        const col = lines[lines.length - 1].length + 1; // chars after last line break
+
+        lineDisplay.textContent = line.toString();
+        colDisplay.textContent = col.toString();
+    }
+}
 
 function showPlayer() {
     setPlayer(elementToBlob("basic-code"));
