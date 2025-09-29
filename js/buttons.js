@@ -1,6 +1,17 @@
-let iframe, doc;
+/**
+ * @type {HTMLIFrameElement}
+ */
+let iframe
+
+/**
+ * @type {Window}
+ */
+let targetWindow;
+
+let doc
+
 export function initButtons() {
-    iframe = document.getElementById('player');
+    iframe = /** @type {HTMLIFrameElement}*/(document.getElementById('player'));
     
     // const file = "<!DOCTYPE html><html><head><style>body{margin:0;padding:1rem;font-family:sans-serif;}</style></head><body>Editable area. Click here or use buttons.</body></html>";
     // iframe.srcdoc = file;
@@ -15,8 +26,9 @@ export function initButtons() {
 
 function onIframeLoaded(event) {
     // event.targetWindow
-    const doc = iframe.contentDocument || iframe.contentWindow.document;
-    // doc = iframe.contentWindow.document;
+    if (iframe.contentWindow) targetWindow = iframe.contentWindow;
+    const doc = iframe.contentDocument || targetWindow.document;
+    // doc = targetWindow.document;
 
     if (!doc) {
         console.error('no doc');
@@ -75,9 +87,12 @@ function sendKey(targetWindow, type, key) {
     console.log(type, key, targetWindow, iframe);
 }
 
+/**
+ * 
+ * @param {Element} button 
+ */
 function handleButton(button) {
     let key = button.dataset.key;
-    const targetWindow = iframe.contentWindow;
     console.log('handling', key);
 
     // button.addEventListener('mousedown', () => {
