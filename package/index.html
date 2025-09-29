@@ -45,6 +45,43 @@
         }
       }
       document.addEventListener('keydown', onKeyDown_blocker, false);
+      document.addEventListener('keydown', (e)=>console.log('keydown received:', e));
+      document.addEventListener('keyup', (e)=>console.log('keyup received:', e));
+
+    //   window.addEventListener('message', (e) => {
+    //     const data = e.data;
+    //     if (!data || !data.type) return;
+
+    //     // Create synthetic KeyboardEvent
+    //     const syntheticEvent = new KeyboardEvent(data.type, {
+    //       key: data.key,
+    //       code: data.code,
+    //       keyCode: data.keyCode,
+    //       charCode: data.charCode,
+    //       which: data.which,
+    //       altKey: data.altKey,
+    //       ctrlKey: data.ctrlKey,
+    //       shiftKey: data.shiftKey,
+    //       metaKey: data.metaKey,
+    //       repeat: data.repeat,
+    //       location: data.location,
+    //       bubbles: true,
+    //       cancelable: true,
+    //       composed: true
+    //     });
+
+    //     // Workaround: define legacy props (since constructor ignores them)
+    //     Object.defineProperties(syntheticEvent, {
+    //       keyCode: { get: () => data.keyCode },
+    //       charCode: { get: () => data.charCode },
+    //       which:   { get: () => data.which }
+    //     });
+
+    //     // Dispatch on body (or a focused element in iframe)
+    //     const target = document.activeElement || document.body;
+    //     target.dispatchEvent(syntheticEvent);
+    // });
+
     </script>
     <script async type="text/javascript" src="LowResNX120.js"></script>
   </body>

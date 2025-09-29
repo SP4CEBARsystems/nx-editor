@@ -51,6 +51,7 @@ function onIframeLoaded(event) {
         console.log('Active element in iframe:', doc.activeElement);
     }, 50);
     document.querySelectorAll("button[data-key]").forEach(handleButton);
+    setupTextInputHandlers();
 };
 
 const keyCodeMap = {
@@ -63,6 +64,47 @@ const keyCodeMap = {
   Escape: 27,
   // ...add more as needed
 };
+
+function setupTextInputHandlers() {
+    const keyInput = document.getElementById("playerTextInput");
+    keyInput.addEventListener('keydown', (event) => {
+        sendKeyboardKey(event, true);
+    });
+    keyInput.addEventListener('keyup', (event) => {
+        sendKeyboardKey(event, false);
+    });
+
+    /**
+     * 
+     * @param {KeyboardEvent} event 
+     * @param {boolean} isDown 
+     */
+    function sendKeyboardKey(event, isDown) {
+        // console.log(`Key ${isDown? 'pressed' : 'lifted'}:`, event.key, event);
+        // const eventData = {
+        //     type: event.type,
+        //     key: event.key,
+        //     code: event.code,
+        //     keyCode: event.keyCode,
+        //     charCode: event.charCode,
+        //     which: event.which,
+        //     altKey: event.altKey,
+        //     ctrlKey: event.ctrlKey,
+        //     shiftKey: event.shiftKey,
+        //     metaKey: event.metaKey,
+        //     repeat: event.repeat,
+        //     location: event.location,
+        //     isTrusted: true,
+        // };
+        // iframe.contentWindow?.postMessage(eventData, '*');
+        // iframe.focus();
+        // if (targetWindow.document.activeElement.dispatchEvent && event) {
+        //     console.log('objects, ', targetWindow.document.activeElement.dispatchEvent, event)
+        //     targetWindow.document.activeElement.dispatchEvent(event);
+        // }
+        // sendKey(targetWindow, 'keyup', event.key);
+    }
+}
 
 function getKeyCode(key) {
   return keyCodeMap[key] ?? key.toUpperCase().charCodeAt(0);
@@ -77,6 +119,21 @@ function createCustomKeyboardEvent(type, key) {
         bubbles: true,
         cancelable: true,
         composed: true
+    });
+}
+
+function createNormalKeyboardEvent(type, key) {
+    const code = getKeyCode(key);
+    return new KeyboardEvent(type, {
+        key,
+        keyCode: code,    // legacy
+        which: code,      // legacy
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+
+        // code: `key${code}`,
+        // isTrusted: true,
     });
 }
 
