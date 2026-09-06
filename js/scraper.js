@@ -22,6 +22,11 @@ async function getTopNxUrl(targetUrl = 'https://lowresnx.inutilis.com/topic.php?
     return fullUrl;
 }
 
+/**
+ * 
+ * @param {string} url url to fetch text from through corsproxy
+ * @returns text from url
+ */
 async function fetchTextWithProxy(url) {
     const encodedUrl = encodeURIComponent(url);
     const apiKey = 'e58d94d9';
@@ -40,6 +45,11 @@ function getUriParam(paramName) {
     return params.get(paramName);
 }
 
+/**
+ * 
+ * @param {string} url url to fetch text from
+ * @returns text from url
+ */
 async function fetchText(url){
     const response = await fetch(url);
     if (!response.ok) {
@@ -48,29 +58,35 @@ async function fetchText(url){
     return await response.text();
 }
 
-async function loadTopNxUrl(param){
+/**
+ * 
+ * @inputUrl {string} inputUrl parameter key name from uri
+ * @returns fetched text
+ */
+async function loadTopNxUrl(inputUrl){
     let url;
-    if (/^https:\/\/lowresnx\.inutilis\.com\/topic\.php\?id=\d+$/.test(param)) {
-        url = await getTopNxUrl(param);
+    const urlSupportTestingRegex = /^https:\/\/lowresnx\.inutilis\.com\/topic\.php\?id=\d+$/;
+    if (urlSupportTestingRegex.test(inputUrl)) {
+        url = await getTopNxUrl(inputUrl);
     } else {
-        url = param;
+        url = inputUrl;
     }
     return await fetchTextWithProxy(url);
 }
 
 /**
- * 
+ * Scrapes and loads NX files from NX pages
  */
 export default async function scraper() {
     const codeElement = /** @type {HTMLInputElement} */(document.getElementById('basic-code'));
     if (!codeElement) {
         throw new Error('no code element');
     }
-    const param = getUriParam('url');
-    if (!param) {
+    const inputUrl = getUriParam('url');
+    if (!inputUrl) {
         throw new Error('no param');
     }
-    const file = await loadTopNxUrl(param)
+    const file = await loadTopNxUrl(inputUrl)
     codeElement.value = file;
     console.log('Top .nx file:', file);
 }
