@@ -23,8 +23,9 @@ async function getTopNxUrl(targetUrl = 'https://lowresnx.inutilis.com/topic.php?
 }
 
 async function fetchTextWithProxy(url) {
-    const corsProxy = 'https://corsproxy.io/?'; // Lightweight proxy
-    return await fetchText(corsProxy + encodeURIComponent(url));
+    const encodedUrl = encodeURIComponent(url);
+    const proxyUrl = `https://corsproxy.io/?key=e58d94d9&url=${encodedUrl}`; // Lightweight proxy
+    return await fetchText(proxyUrl);
 }
 
 /**
