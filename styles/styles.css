@@ -5,7 +5,7 @@ body {
 }
 
 main {
-    max-width: 50rem;
+    max-width: 60rem;
     margin-inline: auto;
 }
 
@@ -141,4 +141,8 @@ button {
 #runShowPlayer {
     background-color: #00FFFF;
     margin-right: 1rem;
+}
+
+.inline {
+    display: inline
 }
